@@ -135,3 +135,12 @@ protected
 - Pages/About
 - Pages/Apartment_Show
 - Pages/NotFound
+
+## Create new Apartment
+- add in apartments_controller
+```
+  skip_before_action :verify_authenticity_token
+```
+
+## My listings
+- a page only shows current_user's listings
