@@ -33,11 +33,25 @@ class ApartmentShow extends React.Component {
     const { apartment, user } = this.state
     return (
       <React.Fragment>
-        <h2>{ apartment.street }</h2>
-        <p>{ apartment.city }, { apartment.state }, { apartment.zipcode }, { apartment.country }</p>
-        <h3> { user.name }</h3>
-        <p>Phone number: { user.phonenumber }</p>
-        <p>Hours to contact: { user.hours }</p>
+        <div class="card border-primary mb-3" style={{width: "20rem", margin:"1rem 2rem"}}>
+          <div class="card-header">Address</div>
+          <div class="card-body">
+            <h4 class="card-title">{ apartment.street }</h4>
+            <p class="card-text">{ apartment.city }, { apartment.state }, { apartment.zipcode }</p>
+            <p class="card-text">{ apartment.country }</p>
+          </div>
+        </div>
+
+        <div class="card border-primary mb-3" style={{width: "20rem", margin:"1rem 2rem"}}>
+          <div class="card-header">Manager</div>
+          <div class="card-body">
+            <h4 class="card-title">{ user.name }</h4>
+            <p class="card-text">Phone Number: { user.phonenumber }</p>
+            <p class="card-text">Hours to contact: { user.hours }</p>
+          </div>
+        </div>
+
+
 
       </React.Fragment>
     );

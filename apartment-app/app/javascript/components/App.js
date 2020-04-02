@@ -1,7 +1,8 @@
 import React from "react"
 import PropTypes from "prop-types"
-import Header from "./components/header"
 import 'bootswatch/dist/litera/bootstrap.min.css';
+import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
+import Header from "./components/header"
 import Home from "./pages/home"
 import About from "./pages/about"
 import MyListings from "./pages/my_listings"
@@ -9,7 +10,6 @@ import ApartmentIndex from "./pages/apartment_index"
 import ApartmentShow from "./pages/apartment_show"
 import NewApartment from "./pages/new_apartment"
 import NotFound from "./pages/notfound"
-import { BrowserRouter as Router, Route, Link, Switch} from 'react-router-dom'
 
 
 
@@ -69,25 +69,21 @@ class App extends React.Component {
     return (
       <React.Fragment>
       <Header
-      logged_in = { logged_in }
-      sign_in_route = { sign_in_route }
-      sign_out_route = { sign_out_route }
-      edit_user_route = { edit_user_route }
-      current_user = { current_user }
-      myListings = { this.state.myApartments }
+        logged_in = { logged_in }
+        sign_in_route = { sign_in_route }
+        sign_out_route = { sign_out_route }
+        edit_user_route = { edit_user_route }
+        current_user = { current_user }
+        myListings = { this.state.myApartments }
       />
       <Router>
         <Switch>
           <Route
             exact path="/about/" component={ About } />
           <Route
-            exact path="/newform"
+            exact path="/newform/"
             render={ (props) => <NewApartment
               handleSubmit={ this.createApartment }
-            /> }/>
-          <Route
-            exact path="/editform/"
-              render={ (props) => <EditForm
             /> }/>
           <Route
             exact path="/apartmentindex/:id"

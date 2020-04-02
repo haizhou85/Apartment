@@ -33,11 +33,13 @@ root to: 'home#root'
 
 - create root.html.erb in ./app/views/home
 ```
+///variables and paths created by Devise, pass to App.js
 <%= react_component("App", {
     logged_in: user_signed_in?,
     sign_in_route: new_user_session_path,
     sign_out_route: destroy_user_session_path,
-    edit_user_route: edit_user_registration_path
+    edit_user_route: edit_user_registration_path,
+    current_user: current_user
 }) %>
 ```
 - ./app/controllers/home_controller.rb
@@ -50,13 +52,14 @@ end
 > to ```config.sign_out_via = :get```
 
 - ./app/javascript/component/App.js
->create react_component here
+>create react component here
 
 ## Add bootstrap
 - $ bundle add bootstrap
 - $ mv app/assets/stylesheets/application.css app/assets/stylesheets/application.scss
-- Add an import to the "sass" file @import 'bootstrap'
+- Add an import to the "sass" file ```@import 'bootstrap'```
 - $ yarn add reactstrap
+### Add Bootswatch
 - $ npm install bootswatch
 - add to app.js
 ```
@@ -69,8 +72,9 @@ import 'bootswatch/dist/litera/bootstrap.min.css'
 - $ rails db:migrate
 - app/controllers/apartments_controller.rb
 ```
-before_action :set_apartment, only: [:show, :edit, :update, :destroy]
-before_action :authenticate_user!
+///only allow authenticate_user to use create, delete, update method.
+before_action :authenticate_user!, only: [:update, :destroy, :create]
+skip_before_action :verify_authenticity_token
 ```
 - app/models/apartment.rb
 ```
@@ -80,7 +84,18 @@ belongs_to :user
 ```
 has_many :apartments
 ```
-- customize sign up form, in config/initializers/devise.rb
+## Validation
+- /app/models/apartment.rb
+```
+validates :street, :city, :state, :zipcode, :country, presence: true
+```
+- app/models/user.rb
+```
+validates :name, :phonenumber, :hours, presence: true
+```
+
+## Customize sign up form
+- in config/initializers/devise.rb
 ```
 # ==> Scopes configuration
 # Turn scoped views on. Before rendering "sessions/new", it will first check for
@@ -90,7 +105,7 @@ config.scoped_views = true
 ```
 - add name, phone number and hours to contact to users table
 - $ rails g migration add_info_columns_to_users
-- in migration
+- in migration file
  ```
 def change
   add_column :users, :name, :string
@@ -111,15 +126,15 @@ protected
 ```
 - create fields in views/devise/registration/new and views/devise/registration/edit
 ```
-<div>
+<div class="field">
    <%= f.label :name %><br />
    <%= f.text_field :name, autofocus: true %>
 </div>
-<div>
-   <%= f.label :phonenumber %><br />
+<div class="field">
+   <%= f.label :phone_number %><br />
    <%= f.text_field :phonenumber, autofocus: true %>
 </div>
-<div>
+<div class="field">
    <%= f.label :hours %><br />
    <%= f.text_field :hours, autofocus: true %>
 </div>
@@ -127,20 +142,18 @@ protected
 - create users and add apartments in seed.rb
 - $ rails db:seed
 
-## Pages
-- $ yarn add react-router-dom
+## Build controller methods
+- in /app/controllers/apartments_controller.rb
+- index, create, show, delete, update
+
+## Build Pages
+- install react router
+$ yarn add react-router-dom
 - Components/Header
 - Pages/Home
-- Pages/Apartment_Index
 - Pages/About
+- Pages/Apartment_Index
 - Pages/Apartment_Show
+- Pages/New_Apartment
+- Pages/My_Listings
 - Pages/NotFound
-
-## Create new Apartment
-- add in apartments_controller
-```
-  skip_before_action :verify_authenticity_token
-```
-
-## My listings
-- a page only shows current_user's listings

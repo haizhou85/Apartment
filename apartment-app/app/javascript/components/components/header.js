@@ -38,9 +38,9 @@ class Header extends React.Component {
                 <li>
                   <a class="nav-link" href={sign_in_route}>Sign In</a>
                 </li>}
-              {logged_in &&
+              {!logged_in &&
                 <li>
-                  <a class="nav-link" href={edit_user_route}>Edit Your Account</a>
+                  <a class="nav-link" href="/users/sign_up">Sign Up</a>
                 </li>}
               {logged_in &&
                 <li>
@@ -49,6 +49,10 @@ class Header extends React.Component {
               {logged_in &&
                 <li>
                   <a class="nav-link" href="/newform">New Apartment</a>
+                </li>}
+              {logged_in &&
+                <li>
+                <a class="nav-link" href={edit_user_route}>Edit Your Account</a>
                 </li>}
               {logged_in &&
                 <li>

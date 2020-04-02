@@ -1,4 +1,6 @@
 class ApartmentsController < ApplicationController
+  before_action :set_apartment, only: [:show, :update, :destroy]
+  before_action :authenticate_user!, only: [:update, :destroy, :create]
   skip_before_action :verify_authenticity_token
   def index
     @apartments = Apartment.all
@@ -11,7 +13,6 @@ class ApartmentsController < ApplicationController
   end
 
   def update
-    @apartment = Apartment.find(params[:id])
     @apartment.update_attributes(apartment_params)
     render json: @apartment
   end
@@ -26,16 +27,18 @@ class ApartmentsController < ApplicationController
   end
 
   def destroy
-    Apartment.destroy(params[:id])
+    @apartment.destroy
   end
 
   def show
-    @apartment = Apartment.find(params[:id])
     @user = User.find(@apartment.user_id)
     render json: { apartment:@apartment, user:@user }
   end
 
   private
+  def set_apartment
+    @apartment = Apartment.find(params[:id])
+  end
   def apartment_params
     params.require(:apartment).permit(:street, :city, :state, :zipcode, :country)
   end

@@ -33,7 +33,7 @@ class NewApartment extends React.Component {
     return(
       <>
         <Form>
-            <FormGroup>
+            <FormGroup style={{width: "30rem", margin:"0.5rem 2rem"}}>
                 <Label htmlFor="street" id="street">Street</Label>
                     <Input
                         type="string"
@@ -70,11 +70,12 @@ class NewApartment extends React.Component {
                             value={ this.state.form.country }
                         />
             </FormGroup>
-              <Button name="submit" id="submit" onClick={ this.handleSubmit }>
+            <button type="button" id="submit" class="btn btn-outline-primary"
+              style={{margin:"1rem 9rem"}}
+              onClick={ this.handleSubmit }>
               Create a New Apartment Profile
-              </Button>
+            </button>
               { this.state.success && <Redirect to="/apartmentindex"/> }
-              <Button id="home" href= "/" >Home</Button>
         </Form>
       </>
     )

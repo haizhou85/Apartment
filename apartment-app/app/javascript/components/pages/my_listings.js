@@ -26,6 +26,7 @@ class MyListings extends React.Component {
      }
    })
   }
+
   handleEdit = (id) => {
     if(this.state.editable == id){
       this.setState({ editable: null })
@@ -41,21 +42,20 @@ class MyListings extends React.Component {
      editable: id
    })}
  }
-handleUpdate = (apartment, id) => {
-  fetch(`http://localhost:3000/apartments/${id}`,
-  {
-    method: 'PUT',
-    body: JSON.stringify({apartment: apartment}),
-    headers: {
-      'Content-Type': 'application/json'
-    }
-  }).then((response) => {
-      this.setState({ success: true })
-      return this.props.getApartments()
-
-
-    })
-}
+ 
+  handleUpdate = (apartment, id) => {
+    fetch(`http://localhost:3000/apartments/${id}`,
+    {
+      method: 'PUT',
+      body: JSON.stringify({apartment: apartment}),
+      headers: {
+        'Content-Type': 'application/json'
+      }
+    }).then((response) => {
+        this.setState({ success: true })
+        return this.props.getApartments()
+      })
+  }
 
 
 
