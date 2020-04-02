@@ -2,8 +2,18 @@ class ApartmentsController < ApplicationController
   skip_before_action :verify_authenticity_token
   def index
     @apartments = Apartment.all
-    @my_apartments = current_user.apartments.all
+    if current_user == nil
+      @my_apartments = []
+    else
+      @my_apartments = current_user.apartments.all
+    end
     render json: { apartments:@apartments, myApartments:@my_apartments}
+  end
+
+  def update
+    @apartment = Apartment.find(params[:id])
+    @apartment.update_attributes(apartment_params)
+    render json: @apartment
   end
 
   def create
@@ -15,6 +25,9 @@ class ApartmentsController < ApplicationController
     end
   end
 
+  def destroy
+    Apartment.destroy(params[:id])
+  end
 
   def show
     @apartment = Apartment.find(params[:id])

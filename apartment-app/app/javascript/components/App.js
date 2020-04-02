@@ -79,24 +79,34 @@ class App extends React.Component {
       <Router>
         <Switch>
           <Route
-          exact path="/about/" component={ About } />
+            exact path="/about/" component={ About } />
           <Route
-          exact path="/newform"
+            exact path="/newform"
             render={ (props) => <NewApartment
-              handleSubmit={ this.createApartment } /> }/>
+              handleSubmit={ this.createApartment }
+            /> }/>
           <Route
-          exact path="/apartmentindex/:id"
-          render={ (props) => <ApartmentShow {...props} /> } />
+            exact path="/editform/"
+              render={ (props) => <EditForm
+            /> }/>
           <Route
-          exact path="/apartmentindex/"
-          render={ (props) => <ApartmentIndex apartments={ this.state.apartments } /> } />
+            exact path="/apartmentindex/:id"
+            render={ (props) => <ApartmentShow {...props}
+            /> } />
           <Route
-          exact path="/mylistings/"
-          render={ (props) => <MyListings apartments={ this.state.myApartments } /> } />
+            exact path="/apartmentindex/"
+            render={ (props) => <ApartmentIndex
+              apartments={ this.state.apartments }
+              /> } />
           <Route
-          exact path="/" exact component={ Home } />
+            exact path="/mylistings/"
+            render={ (props) => <MyListings
+              apartments={ this.state.myApartments }
+              getApartments={ this.getApartments }
+              /> } />
           <Route
-          component={ NotFound } />
+            exact path="/" exact component={ Home } />
+          <Route component={ NotFound } />
         </Switch>
       </Router>
       </React.Fragment>
