@@ -1,13 +1,13 @@
 import React from "react"
-
+import background from "./background.jpeg"
 
 class Home extends React.Component {
   render () {
 
     return (
-      <React.Fragment>
-        <h2>This is Home</h2>
-      </React.Fragment>
+      <>
+        <img src={background} style={{width:"100vw"}}/>
+      </>
     );
   }
 }

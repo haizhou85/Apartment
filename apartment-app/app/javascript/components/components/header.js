@@ -1,5 +1,5 @@
 import React from "react"
-
+import Background from "./header-background.png"
 
 class Header extends React.Component {
 
@@ -14,7 +14,7 @@ class Header extends React.Component {
 
     return (
       <React.Fragment>
-        <div class="jumbotron">
+        <div class="jumbotron" style={{backgroundImage: `url(${Background})`, backgroundSize: "contain"}}>
           <h1 class="display-3">Apartment Management App</h1>
           <p class="lead">This is an app you can browse and manage apartment listings</p>
           {current_user &&

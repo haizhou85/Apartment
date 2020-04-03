@@ -1,6 +1,6 @@
 import React from "react"
 import PropTypes from "prop-types"
-import 'bootswatch/dist/litera/bootstrap.min.css';
+import 'bootswatch/dist/united/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Link, Switch } from 'react-router-dom'
 import Header from "./components/header"
 import Home from "./pages/home"

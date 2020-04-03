@@ -42,7 +42,7 @@ class MyListings extends React.Component {
      editable: id
    })}
  }
- 
+
   handleUpdate = (apartment, id) => {
     fetch(`http://localhost:3000/apartments/${id}`,
     {
@@ -107,10 +107,12 @@ class MyListings extends React.Component {
               <td>{ apartment.country }</td>}
             <td>
             <button type="button" class="btn btn-danger btn-sm"
-              onClick={() => this.handleDelete(`${ apartment.id }`)}>
+              onClick={() => this.handleDelete(`${ apartment.id }`)}
+              style={{margin:"0 0.5em"}}>
               Delete</button>
             <button type="button" class="btn btn-info btn-sm"
-              onClick={() => this.handleEdit(`${ apartment.id }`)}>
+              onClick={() => this.handleEdit(`${ apartment.id }`)}
+              style={{margin:"0 0.5em"}}>
               {(this.state.editable == `${ apartment.id }`)? 'Submit' : 'Edit'}</button>
             </td>
           </tr>

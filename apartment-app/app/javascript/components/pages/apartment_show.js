@@ -50,7 +50,11 @@ class ApartmentShow extends React.Component {
             <p class="card-text">Hours to contact: { user.hours }</p>
           </div>
         </div>
-
+        <button type="button" class="btn btn-outline-primary"
+          style={{margin:"1rem 9.5rem"}}
+          onClick={() => window.history.back()}>
+          Back
+        </button>
 
 
       </React.Fragment>

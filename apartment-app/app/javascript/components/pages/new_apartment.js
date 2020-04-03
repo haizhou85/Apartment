@@ -71,7 +71,7 @@ class NewApartment extends React.Component {
                         />
             </FormGroup>
             <button type="button" id="submit" class="btn btn-outline-primary"
-              style={{margin:"1rem 9rem"}}
+              style={{margin:"1rem 8rem"}}
               onClick={ this.handleSubmit }>
               Create a New Apartment Profile
             </button>
